@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import dynamic from "next/dynamic";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
@@ -31,7 +31,7 @@ import {
 const MonacoEditor = dynamic(() => import("@monaco-editor/react"), {
   ssr: false,
   loading: () => (
-    <div className="h-full w-full bg-[#0d121f] flex items-center justify-center text-slate-500 font-mono text-xs">
+    <div className="h-full w-full bg-[#1e1e1e] flex items-center justify-center text-[#8a8a8a] font-mono text-xs">
       Loading Sandboxed Monaco Engine...
     </div>
   )
@@ -57,7 +57,6 @@ export default function MockInterviewPage() {
   // Active problem
   const [problem, setProblem] = useState<Problem>(PROBLEMS[0]);
   const [userCode, setUserCode] = useState<string>("");
-  const [codeLanguage, setCodeLanguage] = useState<"javascript" | "python">("javascript");
 
   // Timer: 45 minutes = 2700 seconds
   const [timeLeft, setTimeLeft] = useState<number>(45 * 60);
@@ -183,7 +182,7 @@ export default function MockInterviewPage() {
           {
             id: Date.now().toString(),
             sender: "ai",
-            text: `Excellent work! All ${res.passedCount}/${res.totalCount} test cases passed with execution time of ${res.runtimeMs.toFixed(1)}ms. You're ready to submit your interview session.`,
+            text: `Excellent work! All ${res.passedCount}/${res.totalCount} test cases passed with execution time of ${res.runtimeMs.toFixed(1)}ms. You're ready to finish your interview session.`,
             timestamp: "Just now"
           }
         ]);
@@ -240,37 +239,37 @@ export default function MockInterviewPage() {
   };
 
   return (
-    <div className="flex flex-col min-h-screen bg-[#0a0d14] text-slate-100">
+    <div className="flex flex-col min-h-screen bg-[#1a1a1a] text-[#eff1f6]">
       <Navbar />
 
       <main className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-6">
 
         {/* NOT STARTED / SETUP VIEW */}
         {!interviewStarted && (
-          <div className="max-w-3xl mx-auto space-y-8 py-6">
-            <div className="text-center space-y-3">
-              <div className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-xs font-bold shadow-sm">
+          <div className="max-w-3xl mx-auto space-y-6 py-6">
+            <div className="text-center space-y-2.5">
+              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#FFA116]/20 border border-[#FFA116]/30 text-[#FFA116] text-xs font-bold">
                 <Sparkles className="h-3.5 w-3.5" />
                 <span>AI Technical Assessment Simulator</span>
               </div>
-              <h1 className="text-4xl font-black text-white">
+              <h1 className="text-3xl sm:text-4xl font-black text-white">
                 45-Minute Timed Mock Interview
               </h1>
-              <p className="text-sm text-slate-400 max-w-xl mx-auto leading-relaxed">
+              <p className="text-xs sm:text-sm text-[#a0a0a0] max-w-xl mx-auto leading-relaxed">
                 Simulate a real FAANG technical interview. An interactive AI interviewer probes your thought process, analyzes edge cases, and generates an automated rubric scorecard.
               </p>
             </div>
 
             {/* Setup Form */}
-            <div className="p-8 rounded-3xl bg-slate-900/80 border border-slate-800 shadow-2xl space-y-6">
+            <div className="p-6 sm:p-8 rounded-2xl bg-[#282828] border border-[#383838] space-y-6">
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                 {/* Company */}
-                <div className="space-y-2">
-                  <label className="text-xs font-bold text-slate-300">Target Company</label>
+                <div className="space-y-1.5">
+                  <label className="text-xs font-bold text-[#eff1f6]">Target Company</label>
                   <select
                     value={selectedCompany}
                     onChange={(e) => setSelectedCompany(e.target.value)}
-                    className="w-full px-3.5 py-2.5 rounded-xl bg-slate-800 border border-slate-700 text-sm font-semibold text-white focus:outline-none focus:border-blue-500"
+                    className="w-full px-3.5 py-2.5 rounded-lg bg-[#1e1e1e] border border-[#383838] text-xs font-semibold text-white focus:outline-none focus:border-[#FFA116]"
                   >
                     {COMPANIES.map((c) => (
                       <option key={c.slug} value={c.name}>
@@ -281,12 +280,12 @@ export default function MockInterviewPage() {
                 </div>
 
                 {/* Role */}
-                <div className="space-y-2">
-                  <label className="text-xs font-bold text-slate-300">Engineering Role</label>
+                <div className="space-y-1.5">
+                  <label className="text-xs font-bold text-[#eff1f6]">Engineering Role</label>
                   <select
                     value={selectedRole}
                     onChange={(e) => setSelectedRole(e.target.value)}
-                    className="w-full px-3.5 py-2.5 rounded-xl bg-slate-800 border border-slate-700 text-sm font-semibold text-white focus:outline-none focus:border-blue-500"
+                    className="w-full px-3.5 py-2.5 rounded-lg bg-[#1e1e1e] border border-[#383838] text-xs font-semibold text-white focus:outline-none focus:border-[#FFA116]"
                   >
                     {ROLES.map((r) => (
                       <option key={r.slug} value={r.title}>
@@ -297,12 +296,12 @@ export default function MockInterviewPage() {
                 </div>
 
                 {/* Difficulty */}
-                <div className="space-y-2">
-                  <label className="text-xs font-bold text-slate-300">Difficulty Tier</label>
+                <div className="space-y-1.5">
+                  <label className="text-xs font-bold text-[#eff1f6]">Difficulty Tier</label>
                   <select
                     value={selectedDifficulty}
                     onChange={(e) => setSelectedDifficulty(e.target.value)}
-                    className="w-full px-3.5 py-2.5 rounded-xl bg-slate-800 border border-slate-700 text-sm font-semibold text-white focus:outline-none focus:border-blue-500"
+                    className="w-full px-3.5 py-2.5 rounded-lg bg-[#1e1e1e] border border-[#383838] text-xs font-semibold text-white focus:outline-none focus:border-[#FFA116]"
                   >
                     <option value="Easy">Easy (Entry Level)</option>
                     <option value="Medium">Medium (Standard FAANG)</option>
@@ -312,12 +311,12 @@ export default function MockInterviewPage() {
               </div>
 
               {/* Tips */}
-              <div className="p-4 rounded-2xl bg-slate-800/40 border border-slate-700/60 space-y-2 text-xs text-slate-300">
-                <div className="font-bold text-slate-200 flex items-center gap-1.5">
-                  <ShieldCheck className="h-4 w-4 text-emerald-400" />
+              <div className="p-4 rounded-xl bg-[#1e1e1e] border border-[#383838] space-y-2 text-xs text-[#a0a0a0]">
+                <div className="font-bold text-white flex items-center gap-1.5">
+                  <ShieldCheck className="h-4 w-4 text-[#00b8a3]" />
                   <span>Interview Assessment Rules:</span>
                 </div>
-                <ul className="list-disc list-inside space-y-1 text-slate-400 pl-1">
+                <ul className="list-disc list-inside space-y-1 pl-1">
                   <li>You have exactly 45 minutes to discuss the solution and write passing code.</li>
                   <li>Type your thought process into the chat to earn communication points.</li>
                   <li>In-browser test runner evaluates edge cases instantly with zero server lag.</li>
@@ -327,9 +326,9 @@ export default function MockInterviewPage() {
               <div className="pt-2 flex justify-center">
                 <button
                   onClick={handleStartInterview}
-                  className="flex items-center gap-2 px-8 py-3.5 rounded-2xl bg-blue-600 hover:bg-blue-500 text-white font-bold text-base shadow-xl shadow-blue-600/30 transition-all hover:scale-[1.02]"
+                  className="flex items-center gap-2 px-8 py-3 rounded-xl bg-[#FFA116] hover:bg-[#e08e14] text-black font-bold text-sm transition-all"
                 >
-                  <Play className="h-4 w-4 fill-white" />
+                  <Play className="h-4 w-4 fill-black" />
                   <span>Begin 45-Min Interview Session</span>
                 </button>
               </div>
@@ -341,48 +340,48 @@ export default function MockInterviewPage() {
         {interviewStarted && (
           <div className="space-y-4">
             {/* Top Status Bar */}
-            <div className="p-4 rounded-2xl bg-slate-900 border border-slate-800 flex items-center justify-between">
+            <div className="p-3.5 rounded-xl bg-[#282828] border border-[#383838] flex items-center justify-between">
               <div className="flex items-center gap-4">
                 <div className="flex items-center gap-2 font-mono text-sm font-bold">
                   <Clock
                     className={`h-4 w-4 ${
-                      timeLeft < 300 ? "text-red-400 animate-pulse" : "text-amber-400"
+                      timeLeft < 300 ? "text-[#ff375f] animate-pulse" : "text-[#FFA116]"
                     }`}
                   />
                   <span
                     className={
-                      timeLeft < 300 ? "text-red-400 font-black text-base" : "text-white"
+                      timeLeft < 300 ? "text-[#ff375f] font-black" : "text-white"
                     }
                   >
                     {formatTime(timeLeft)}
                   </span>
                 </div>
 
-                <div className="h-4 w-px bg-slate-800 hidden sm:block" />
+                <div className="h-4 w-px bg-[#383838] hidden sm:block" />
 
-                <div className="hidden sm:flex items-center gap-2 text-xs text-slate-300">
-                  <span className="font-semibold text-slate-400">Target:</span>
+                <div className="hidden sm:flex items-center gap-2 text-xs text-[#a0a0a0]">
+                  <span>Target:</span>
                   <span className="font-bold text-white">{selectedCompany}</span>
                   <span>•</span>
                   <span>{selectedRole}</span>
                 </div>
               </div>
 
-              <div className="flex items-center gap-3">
+              <div className="flex items-center gap-2.5">
                 <button
                   onClick={() => {
                     setInputMessage("Could you please provide a hint?");
                     handleSendMessage();
                   }}
-                  className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-semibold transition-colors"
+                  className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#333333] hover:bg-[#3e3e3e] text-[#eff1f6] text-xs font-semibold transition-colors border border-[#404040]"
                 >
-                  <HelpCircle className="h-3.5 w-3.5" />
+                  <HelpCircle className="h-3.5 w-3.5 text-[#FFA116]" />
                   <span>Ask Hint</span>
                 </button>
 
                 <button
                   onClick={handleFinishInterview}
-                  className="px-4 py-1.5 rounded-lg bg-red-600/20 hover:bg-red-600 text-red-300 hover:text-white border border-red-500/30 text-xs font-bold transition-all"
+                  className="px-3.5 py-1.5 rounded-lg bg-[#ff375f]/20 hover:bg-[#ff375f] text-[#ff375f] hover:text-white border border-[#ff375f]/30 text-xs font-bold transition-all"
                 >
                   Finish Interview
                 </button>
@@ -390,36 +389,36 @@ export default function MockInterviewPage() {
             </div>
 
             {/* Split Screen Studio */}
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 min-h-[600px]">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-3 min-h-[600px]">
 
               {/* LEFT 5 COLS: Problem Statement & AI Chat */}
-              <div className="lg:col-span-5 flex flex-col gap-4">
+              <div className="lg:col-span-5 flex flex-col gap-3">
                 {/* Problem Statement Card */}
-                <div className="p-5 rounded-2xl bg-slate-900/80 border border-slate-800 space-y-3 max-h-[300px] overflow-y-auto">
+                <div className="p-4 rounded-xl bg-[#282828] border border-[#383838] space-y-2.5 max-h-[280px] overflow-y-auto">
                   <div className="flex items-center justify-between">
-                    <h2 className="font-black text-lg text-white">
+                    <h2 className="font-black text-base text-white">
                       {problem.title}
                     </h2>
                     <span
                       className={`text-[10px] font-bold px-2 py-0.5 rounded-full ${
                         problem.difficulty === "Easy"
-                          ? "bg-emerald-500/10 text-emerald-400 border border-emerald-500/20"
+                          ? "bg-[#00b8a3]/20 text-[#00b8a3]"
                           : problem.difficulty === "Medium"
-                          ? "bg-amber-500/10 text-amber-400 border border-amber-500/20"
-                          : "bg-red-500/10 text-red-400 border border-red-500/20"
+                          ? "bg-[#ffc01e]/20 text-[#ffc01e]"
+                          : "bg-[#ff375f]/20 text-[#ff375f]"
                       }`}
                     >
                       {problem.difficulty}
                     </span>
                   </div>
 
-                  <p className="text-xs text-slate-300 leading-relaxed whitespace-pre-line">
+                  <p className="text-xs text-[#eff1f6] leading-relaxed whitespace-pre-line">
                     {problem.description}
                   </p>
 
-                  <div className="pt-2 border-t border-slate-800">
-                    <div className="text-[11px] font-bold text-slate-400">Sample Example:</div>
-                    <div className="mt-1 p-2 rounded-lg bg-slate-950 font-mono text-[11px] text-slate-300 space-y-0.5">
+                  <div className="pt-2 border-t border-[#383838]">
+                    <div className="text-[11px] font-bold text-[#8a8a8a]">Sample Example:</div>
+                    <div className="mt-1 p-2 rounded-lg bg-[#1e1e1e] font-mono text-[11px] text-[#eff1f6] space-y-0.5">
                       <div>Input: {problem.examples[0]?.input}</div>
                       <div>Output: {problem.examples[0]?.output}</div>
                     </div>
@@ -427,23 +426,23 @@ export default function MockInterviewPage() {
                 </div>
 
                 {/* AI Interviewer Live Chat */}
-                <div className="flex-1 rounded-2xl bg-slate-900/80 border border-slate-800 flex flex-col overflow-hidden min-h-[320px]">
-                  <div className="px-4 py-3 border-b border-slate-800 bg-slate-900 flex items-center justify-between">
+                <div className="flex-1 rounded-xl bg-[#282828] border border-[#383838] flex flex-col overflow-hidden min-h-[320px]">
+                  <div className="px-4 py-2.5 border-b border-[#383838] bg-[#222222] flex items-center justify-between">
                     <div className="flex items-center gap-2">
-                      <Bot className="h-4 w-4 text-blue-400" />
+                      <Bot className="h-4 w-4 text-[#FFA116]" />
                       <span className="text-xs font-bold text-white">
                         AI Interviewer Stream
                       </span>
                     </div>
                     {isAiTyping && (
-                      <span className="text-[10px] text-slate-400 animate-pulse">
+                      <span className="text-[10px] text-[#FFA116] animate-pulse">
                         Interviewer typing...
                       </span>
                     )}
                   </div>
 
                   {/* Messages Scroll Area */}
-                  <div className="flex-1 p-4 space-y-3 overflow-y-auto max-h-[300px]">
+                  <div className="flex-1 p-3.5 space-y-2.5 overflow-y-auto max-h-[300px]">
                     {messages.map((m) => (
                       <div
                         key={m.id}
@@ -452,15 +451,15 @@ export default function MockInterviewPage() {
                         }`}
                       >
                         {m.sender === "ai" && (
-                          <div className="h-7 w-7 rounded-lg bg-blue-600/20 border border-blue-500/30 flex items-center justify-center flex-shrink-0 text-blue-400">
+                          <div className="h-6 w-6 rounded-md bg-[#FFA116]/20 border border-[#FFA116]/30 flex items-center justify-center flex-shrink-0 text-[#FFA116]">
                             <Bot className="h-3.5 w-3.5" />
                           </div>
                         )}
                         <div
-                          className={`p-3 rounded-2xl text-xs max-w-[85%] leading-relaxed ${
+                          className={`p-2.5 rounded-xl text-xs max-w-[85%] leading-relaxed ${
                             m.sender === "user"
-                              ? "bg-blue-600 text-white rounded-br-xs"
-                              : "bg-slate-800/90 text-slate-200 border border-slate-700/60 rounded-bl-xs"
+                              ? "bg-[#FFA116] text-black font-medium"
+                              : "bg-[#1e1e1e] text-[#eff1f6] border border-[#383838]"
                           }`}
                         >
                           {m.text}
@@ -470,7 +469,7 @@ export default function MockInterviewPage() {
                   </div>
 
                   {/* Chat input */}
-                  <div className="p-3 border-t border-slate-800 bg-slate-900 flex items-center gap-2">
+                  <div className="p-2.5 border-t border-[#383838] bg-[#222222] flex items-center gap-2">
                     <input
                       type="text"
                       value={inputMessage}
@@ -479,33 +478,33 @@ export default function MockInterviewPage() {
                         if (e.key === "Enter") handleSendMessage();
                       }}
                       placeholder="Explain your approach, ask questions, or discuss complexity..."
-                      className="flex-1 px-3.5 py-2 rounded-xl bg-slate-800/80 border border-slate-700 text-xs text-white placeholder-slate-400 focus:outline-none focus:border-blue-500"
+                      className="flex-1 px-3 py-1.5 rounded-lg bg-[#1e1e1e] border border-[#383838] text-xs text-white placeholder-[#8a8a8a] focus:outline-none focus:border-[#FFA116]"
                     />
                     <button
                       onClick={handleSendMessage}
-                      className="p-2 rounded-xl bg-blue-600 hover:bg-blue-500 text-white transition-colors"
+                      className="p-2 rounded-lg bg-[#FFA116] hover:bg-[#e08e14] text-black transition-colors"
                     >
-                      <Send className="h-4 w-4" />
+                      <Send className="h-3.5 w-3.5" />
                     </button>
                   </div>
                 </div>
               </div>
 
               {/* RIGHT 7 COLS: Code Editor & Execution Console */}
-              <div className="lg:col-span-7 flex flex-col gap-4">
+              <div className="lg:col-span-7 flex flex-col gap-3">
                 {/* Editor Container */}
-                <div className="rounded-2xl border border-slate-800 bg-[#0d121f] overflow-hidden flex flex-col h-[400px]">
-                  <div className="px-4 py-2.5 border-b border-slate-800 bg-[#0a0e1a] flex items-center justify-between">
+                <div className="rounded-xl border border-[#383838] bg-[#1e1e1e] overflow-hidden flex flex-col h-[400px]">
+                  <div className="px-3.5 py-2 border-b border-[#383838] bg-[#222222] flex items-center justify-between">
                     <div className="flex items-center gap-2">
-                      <span className="text-xs font-bold text-slate-300">JavaScript Editor</span>
-                      <span className="text-[10px] text-emerald-400 font-mono">Live Sandbox</span>
+                      <span className="text-xs font-bold text-white">JavaScript</span>
+                      <span className="text-[10px] text-[#00b8a3] font-mono">Live Sandbox</span>
                     </div>
                     <button
                       onClick={handleRunCode}
                       disabled={isRunning}
-                      className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold shadow-md shadow-emerald-600/20 disabled:opacity-50 transition-all"
+                      className="flex items-center gap-1.5 px-3 py-1 rounded-md bg-[#333333] hover:bg-[#3e3e3e] text-white text-xs font-bold border border-[#404040] disabled:opacity-50 transition-all"
                     >
-                      <Play className="h-3.5 w-3.5 fill-white" />
+                      <Play className="h-3 w-3 text-[#FFA116] fill-[#FFA116]" />
                       <span>{isRunning ? "Running..." : "Test Code"}</span>
                     </button>
                   </div>
@@ -530,17 +529,17 @@ export default function MockInterviewPage() {
                 </div>
 
                 {/* Test Runner Results */}
-                <div className="p-4 rounded-2xl bg-slate-900/90 border border-slate-800 space-y-3 min-h-[160px]">
+                <div className="p-3.5 rounded-xl bg-[#282828] border border-[#383838] space-y-2.5 min-h-[160px]">
                   <div className="flex items-center justify-between text-xs">
-                    <span className="font-bold text-slate-400 uppercase tracking-wider">
+                    <span className="font-bold text-[#8a8a8a] uppercase tracking-wider">
                       Sandboxed Execution Results
                     </span>
                     {runResult && (
                       <span
-                        className={`font-bold px-2 py-0.5 rounded ${
+                        className={`font-bold px-2 py-0.5 rounded text-[11px] ${
                           runResult.status === "Accepted"
-                            ? "bg-emerald-500/20 text-emerald-400"
-                            : "bg-red-500/20 text-red-400"
+                            ? "bg-[#00b8a3]/20 text-[#00b8a3]"
+                            : "bg-[#ff375f]/20 text-[#ff375f]"
                         }`}
                       >
                         {runResult.status === "Accepted"
@@ -551,7 +550,7 @@ export default function MockInterviewPage() {
                   </div>
 
                   {!runResult ? (
-                    <div className="text-xs text-slate-500 font-mono py-4 text-center">
+                    <div className="text-xs text-[#8a8a8a] font-mono py-4 text-center">
                       Click &quot;Test Code&quot; to execute tests against sample constraints.
                     </div>
                   ) : (
@@ -559,21 +558,21 @@ export default function MockInterviewPage() {
                       {runResult.results.map((t, idx) => (
                         <div
                           key={idx}
-                          className={`p-2.5 rounded-xl border font-mono text-xs ${
+                          className={`p-2 rounded-lg border font-mono text-xs ${
                             t.passed
-                              ? "bg-emerald-950/20 border-emerald-500/30 text-emerald-300"
-                              : "bg-red-950/20 border-red-500/30 text-red-300"
+                              ? "bg-[#00b8a3]/10 border-[#00b8a3]/30 text-[#00b8a3]"
+                              : "bg-[#ff375f]/10 border-[#ff375f]/30 text-[#ff375f]"
                           }`}
                         >
-                          <div className="flex items-center justify-between font-bold">
+                          <div className="flex items-center justify-between font-bold text-[11px]">
                             <span>Case {t.testCaseIndex + 1}</span>
                             <span>{t.passed ? "PASSED" : "FAILED"}</span>
                           </div>
-                          <div className="mt-1 text-[11px] text-slate-400 space-y-0.5">
+                          <div className="mt-1 text-[11px] text-[#a0a0a0] space-y-0.5">
                             <div>Input: {t.input}</div>
                             <div>Expected: {t.expected}</div>
                             <div>Actual: {t.actual}</div>
-                            {t.error && <div className="text-red-400">Error: {t.error}</div>}
+                            {t.error && <div className="text-[#ff375f]">Error: {t.error}</div>}
                           </div>
                         </div>
                       ))}
@@ -587,65 +586,65 @@ export default function MockInterviewPage() {
 
         {/* POST INTERVIEW SCORECARD MODAL */}
         {interviewFinished && scorecard && (
-          <div className="fixed inset-0 z-50 bg-black/80 backdrop-blur-md flex items-center justify-center p-4">
-            <div className="max-w-2xl w-full p-8 rounded-3xl bg-slate-900 border border-slate-700 shadow-2xl space-y-6 animate-in fade-in zoom-in-95 duration-200">
+          <div className="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4">
+            <div className="max-w-2xl w-full p-6 sm:p-8 rounded-2xl bg-[#282828] border border-[#383838] shadow-2xl space-y-5">
               <div className="text-center space-y-2">
-                <div className="h-14 w-14 rounded-2xl bg-blue-500/20 border border-blue-500/30 flex items-center justify-center mx-auto text-blue-400">
-                  <Award className="h-8 w-8" />
+                <div className="h-12 w-12 rounded-xl bg-[#FFA116]/20 border border-[#FFA116]/30 flex items-center justify-center mx-auto text-[#FFA116]">
+                  <Award className="h-6 w-6" />
                 </div>
-                <h2 className="text-2xl font-black text-white">
+                <h2 className="text-xl sm:text-2xl font-black text-white">
                   Technical Interview Assessment
                 </h2>
-                <div className="inline-block px-4 py-1 rounded-full font-black text-sm uppercase bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">
+                <div className="inline-block px-3 py-1 rounded-full font-bold text-xs uppercase bg-[#00b8a3]/20 text-[#00b8a3] border border-[#00b8a3]/30">
                   Verdict: {scorecard.verdict}
                 </div>
               </div>
 
               {/* Rubric metrics */}
-              <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 text-center">
-                <div className="p-3 rounded-xl bg-slate-800/80 border border-slate-700">
-                  <div className="text-[11px] text-slate-400">Problem Solving</div>
-                  <div className="text-xl font-black text-blue-400 mt-0.5">
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5 text-center">
+                <div className="p-3 rounded-lg bg-[#1e1e1e] border border-[#383838]">
+                  <div className="text-[10px] text-[#8a8a8a]">Problem Solving</div>
+                  <div className="text-lg font-black text-[#FFA116] mt-0.5">
                     {scorecard.problemSolving}/10
                   </div>
                 </div>
-                <div className="p-3 rounded-xl bg-slate-800/80 border border-slate-700">
-                  <div className="text-[11px] text-slate-400">Complexity</div>
-                  <div className="text-xl font-black text-purple-400 mt-0.5">
+                <div className="p-3 rounded-lg bg-[#1e1e1e] border border-[#383838]">
+                  <div className="text-[10px] text-[#8a8a8a]">Complexity</div>
+                  <div className="text-lg font-black text-[#ffc01e] mt-0.5">
                     {scorecard.complexity}/10
                   </div>
                 </div>
-                <div className="p-3 rounded-xl bg-slate-800/80 border border-slate-700">
-                  <div className="text-[11px] text-slate-400">Code Quality</div>
-                  <div className="text-xl font-black text-emerald-400 mt-0.5">
+                <div className="p-3 rounded-lg bg-[#1e1e1e] border border-[#383838]">
+                  <div className="text-[10px] text-[#8a8a8a]">Code Quality</div>
+                  <div className="text-lg font-black text-[#00b8a3] mt-0.5">
                     {scorecard.codeQuality}/10
                   </div>
                 </div>
-                <div className="p-3 rounded-xl bg-slate-800/80 border border-slate-700">
-                  <div className="text-[11px] text-slate-400">Communication</div>
-                  <div className="text-xl font-black text-amber-400 mt-0.5">
+                <div className="p-3 rounded-lg bg-[#1e1e1e] border border-[#383838]">
+                  <div className="text-[10px] text-[#8a8a8a]">Communication</div>
+                  <div className="text-lg font-black text-white mt-0.5">
                     {scorecard.communication}/10
                   </div>
                 </div>
               </div>
 
               {/* Feedback */}
-              <div className="p-4 rounded-2xl bg-slate-800/40 border border-slate-700 space-y-1.5">
-                <div className="text-xs font-bold text-slate-300">
+              <div className="p-3.5 rounded-xl bg-[#1e1e1e] border border-[#383838] space-y-1">
+                <div className="text-xs font-bold text-white">
                   Senior Interviewer Debrief Notes:
                 </div>
-                <p className="text-xs text-slate-400 leading-relaxed">
+                <p className="text-xs text-[#a0a0a0] leading-relaxed">
                   {scorecard.feedback}
                 </p>
               </div>
 
-              <div className="flex items-center justify-center gap-3 pt-2">
+              <div className="flex items-center justify-center gap-3 pt-1">
                 <button
                   onClick={() => {
                     setInterviewFinished(false);
                     setInterviewStarted(false);
                   }}
-                  className="px-6 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-bold text-xs shadow-lg transition-all"
+                  className="px-6 py-2.5 rounded-xl bg-[#FFA116] hover:bg-[#e08e14] text-black font-bold text-xs transition-all"
                 >
                   Start New Interview
                 </button>

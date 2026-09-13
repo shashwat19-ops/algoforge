@@ -20,27 +20,27 @@ export default function StudyPlansPage() {
   const { solvedProblems } = useUser();
 
   return (
-    <div className="flex flex-col min-h-screen bg-[#0a0d14] text-slate-100">
+    <div className="flex flex-col min-h-screen bg-[#1a1a1a] text-[#eff1f6]">
       <Navbar />
 
-      <main className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
+      <main className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-6">
 
         {/* HEADER */}
         <div>
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-xs font-bold mb-3">
+          <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-[#FFA116]/20 border border-[#FFA116]/30 text-[#FFA116] text-xs font-bold mb-2">
             <BookOpen className="h-3.5 w-3.5" />
-            <span>Structured Interview Prep</span>
+            <span>Structured Interview Roadmaps</span>
           </div>
-          <h1 className="text-3xl sm:text-4xl font-black text-white">
+          <h1 className="text-2xl sm:text-3xl font-black text-white">
             Curated Study Plans & Roadmaps
           </h1>
-          <p className="text-sm text-slate-400 mt-2 max-w-2xl">
-            Step-by-step learning schedules crafted by industry experts to build algorithmic mastery systematically without overwhelming you.
+          <p className="text-xs text-[#a0a0a0] mt-1.5 max-w-2xl">
+            Step-by-step learning schedules crafted by industry experts (Blind 75, NeetCode 150, Striver&apos;s SDE Sheet, Grind 75, Top Interview 150).
           </p>
         </div>
 
         {/* STUDY PLANS GRID */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {STUDY_PLANS.map((plan) => {
             const allProblemIds = plan.chapters.flatMap((c) => c.problemIds);
             const totalProblems = allProblemIds.length;
@@ -56,38 +56,38 @@ export default function StudyPlansPage() {
               <Link
                 key={plan.slug}
                 href={`/study-plans/${plan.slug}`}
-                className="group p-7 rounded-3xl bg-slate-900/80 border border-slate-800 hover:border-blue-500/40 transition-all hover:-translate-y-1 shadow-xl shadow-black/40 flex flex-col justify-between space-y-6"
+                className="group p-6 rounded-xl bg-[#282828] border border-[#383838] hover:border-[#FFA116]/50 hover:bg-[#303030] transition-all flex flex-col justify-between space-y-4"
               >
-                <div className="space-y-4">
+                <div className="space-y-3">
                   <div className="flex items-center justify-between">
-                    <span className="text-xs font-bold px-3 py-1 rounded-full bg-blue-500/10 text-blue-400 border border-blue-500/20">
+                    <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-[#FFA116]/20 text-[#FFA116] border border-[#FFA116]/30">
                       {plan.badge}
                     </span>
-                    <div className="flex items-center gap-1 text-xs text-slate-400 font-medium">
+                    <div className="flex items-center gap-1 text-xs text-[#8a8a8a] font-medium">
                       <Clock className="h-3.5 w-3.5" />
                       <span>{plan.estimatedWeeks} Weeks Pace</span>
                     </div>
                   </div>
 
                   <div>
-                    <h2 className="text-2xl font-black text-white group-hover:text-blue-400 transition-colors">
+                    <h2 className="text-lg font-bold text-white group-hover:text-[#FFA116] transition-colors">
                       {plan.title}
                     </h2>
-                    <p className="text-xs text-slate-400 mt-2 leading-relaxed">
+                    <p className="text-xs text-[#a0a0a0] mt-1 leading-relaxed">
                       {plan.description}
                     </p>
                   </div>
 
                   {/* Chapters Preview */}
-                  <div className="space-y-1.5 pt-2">
-                    <div className="text-[11px] font-bold text-slate-400 uppercase tracking-wider">
+                  <div className="space-y-1.5 pt-1">
+                    <div className="text-[10px] font-bold text-[#8a8a8a] uppercase tracking-wider">
                       Included Modules ({plan.chapters.length})
                     </div>
                     <div className="flex flex-wrap gap-1.5">
                       {plan.chapters.map((ch, idx) => (
                         <span
                           key={idx}
-                          className="text-[10px] font-medium px-2.5 py-1 rounded-lg bg-slate-800/80 text-slate-300 border border-slate-700/60"
+                          className="text-[10px] font-medium px-2 py-0.5 rounded bg-[#1e1e1e] text-[#a0a0a0] border border-[#383838]"
                         >
                           {ch.title} ({ch.problemIds.length})
                         </span>
@@ -97,17 +97,16 @@ export default function StudyPlansPage() {
                 </div>
 
                 {/* Progress Bar & Footer */}
-                <div className="pt-4 border-t border-slate-800/80 space-y-3">
+                <div className="pt-3 border-t border-[#383838] space-y-2">
                   <div className="flex items-center justify-between text-xs">
-                    <span className="text-slate-400">Created by {plan.author}</span>
-                    <span className="font-bold text-white">
-                      {solvedInPlan} / {totalProblems} ({progressPercent}%)
+                    <span className="text-[#8a8a8a]">Progress</span>
+                    <span className="font-semibold text-white">
+                      {solvedInPlan} / {totalProblems} Solved ({progressPercent}%)
                     </span>
                   </div>
-
-                  <div className="w-full bg-slate-800 rounded-full h-2 overflow-hidden">
+                  <div className="h-1.5 w-full rounded-full bg-[#1e1e1e] overflow-hidden">
                     <div
-                      className="bg-gradient-to-r from-blue-500 to-indigo-500 h-full rounded-full transition-all duration-500"
+                      className="h-full bg-[#00b8a3] rounded-full transition-all duration-500"
                       style={{ width: `${progressPercent}%` }}
                     />
                   </div>

@@ -18,7 +18,8 @@ import {
   Layers,
   Code2,
   Clock,
-  Award
+  Award,
+  Crown
 } from "lucide-react";
 
 export default function CompanyDetailPage({
@@ -47,16 +48,16 @@ export default function CompanyDetailPage({
   ).length;
 
   return (
-    <div className="flex flex-col min-h-screen bg-[#0a0d14] text-slate-100">
+    <div className="flex flex-col min-h-screen bg-[#1a1a1a] text-[#eff1f6]">
       <Navbar />
 
-      <main className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
+      <main className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-6">
 
         {/* Back breadcrumb */}
         <div>
           <Link
             href="/companies"
-            className="inline-flex items-center gap-1.5 text-xs font-semibold text-slate-400 hover:text-white transition-colors"
+            className="inline-flex items-center gap-1.5 text-xs font-semibold text-[#a0a0a0] hover:text-white transition-colors"
           >
             <ChevronLeft className="h-4 w-4" />
             <span>Back to All Companies</span>
@@ -64,40 +65,41 @@ export default function CompanyDetailPage({
         </div>
 
         {/* Company Header Card */}
-        <div className="p-8 rounded-3xl bg-gradient-to-r from-slate-900 via-slate-900/90 to-slate-950 border border-slate-800 relative overflow-hidden shadow-2xl">
-          <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 relative z-10">
-            <div className="flex items-start sm:items-center gap-5">
+        <div className="p-6 rounded-2xl bg-[#282828] border border-[#383838]">
+          <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
+            <div className="flex items-start sm:items-center gap-4">
               <div
-                className={`h-16 w-16 rounded-2xl bg-gradient-to-tr ${company.color} flex items-center justify-center font-black text-white text-2xl shadow-xl flex-shrink-0`}
+                className={`h-14 w-14 rounded-xl bg-gradient-to-tr ${company.color} flex items-center justify-center font-black text-white text-xl shadow-md shrink-0`}
               >
                 {company.logo}
               </div>
 
               <div className="space-y-1">
-                <div className="flex items-center gap-3">
-                  <h1 className="text-3xl font-black text-white">
+                <div className="flex items-center gap-2.5">
+                  <h1 className="text-2xl font-black text-white">
                     {company.name} Interview Bank
                   </h1>
-                  <span className="text-[11px] font-bold px-2.5 py-0.5 rounded-full bg-amber-500/10 text-amber-400 border border-amber-500/20">
+                  <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-[#FFA116]/20 text-[#FFA116] border border-[#FFA116]/30 flex items-center gap-1">
+                    <Crown className="h-3 w-3" />
                     Premium Unlocked
                   </span>
                 </div>
-                <p className="text-sm text-slate-400 max-w-2xl">
+                <p className="text-xs text-[#a0a0a0] max-w-2xl">
                   {company.description}
                 </p>
               </div>
             </div>
 
             {/* Progress pill */}
-            <div className="p-4 rounded-2xl bg-slate-800/60 border border-slate-700/60 flex items-center gap-4 min-w-[200px]">
+            <div className="p-3.5 rounded-xl bg-[#1e1e1e] border border-[#383838] flex items-center gap-4 min-w-[180px]">
               <div className="flex-1">
-                <div className="text-xs text-slate-400">Solved for {company.name}</div>
-                <div className="text-xl font-black text-white mt-0.5">
+                <div className="text-[11px] text-[#8a8a8a]">Solved for {company.name}</div>
+                <div className="text-lg font-black text-white mt-0.5">
                   {solvedCount} / {companyProblems.length}
                 </div>
               </div>
               <div className="text-right">
-                <span className="text-sm font-bold text-emerald-400">
+                <span className="text-xs font-bold text-[#00b8a3]">
                   {companyProblems.length > 0
                     ? Math.round((solvedCount / companyProblems.length) * 100)
                     : 0}
@@ -108,123 +110,113 @@ export default function CompanyDetailPage({
           </div>
 
           {/* Top Topics */}
-          <div className="mt-6 pt-6 border-t border-slate-800/80 flex flex-wrap items-center gap-2">
-            <span className="text-xs font-semibold text-slate-400 mr-2">
+          <div className="mt-5 pt-4 border-t border-[#383838] flex flex-wrap items-center gap-2">
+            <span className="text-xs font-semibold text-[#8a8a8a] mr-1">
               Frequent Assessment Topics:
             </span>
             {company.popularCategories.map((cat, i) => (
               <span
                 key={i}
-                className="text-xs font-medium px-3 py-1 rounded-lg bg-slate-800 text-slate-200 border border-slate-700/60 inline-flex items-center gap-1.5"
+                className="text-xs font-medium px-2.5 py-0.5 rounded bg-[#1e1e1e] text-[#eff1f6] border border-[#383838] inline-flex items-center gap-1.5"
               >
                 <span>{cat.name}</span>
-                <span className="text-[10px] font-bold text-blue-400">({cat.percentage}%)</span>
+                <span className="text-[10px] font-bold text-[#FFA116]">
+                  {cat.percentage}%
+                </span>
               </span>
             ))}
           </div>
         </div>
 
-        {/* Problems List */}
-        <div className="rounded-2xl border border-slate-800 bg-slate-900/60 overflow-hidden shadow-xl">
-          <div className="px-6 py-4 border-b border-slate-800 flex items-center justify-between">
-            <div className="text-xs font-bold text-slate-400 uppercase tracking-wider">
-              {companyProblems.length} Frequently Asked Questions
-            </div>
-            <span className="text-xs text-slate-500">
-              Ranked by frequency in recent technical interviews
-            </span>
+        {/* Problem Table */}
+        <div className="rounded-xl border border-[#383838] bg-[#282828] overflow-hidden">
+          <div className="p-4 border-b border-[#383838] flex items-center justify-between">
+            <h2 className="text-sm font-bold text-white flex items-center gap-2">
+              <Code2 className="h-4 w-4 text-[#FFA116]" />
+              <span>Questions Asked at {company.name} ({companyProblems.length})</span>
+            </h2>
           </div>
 
-          <div className="divide-y divide-slate-800/60">
-            {companyProblems.length === 0 ? (
-              <div className="py-12 text-center text-slate-400">
-                <Code2 className="h-10 w-10 text-slate-600 mx-auto mb-2" />
-                <p className="text-sm">More problems are being curated for this company.</p>
-              </div>
-            ) : (
-              companyProblems.map((problem, index) => {
-                const isSolved = solvedProblems.has(problem.id);
-                const bookmarked = isBookmarked(problem.id);
+          <div className="overflow-x-auto">
+            <table className="w-full text-left border-collapse">
+              <thead>
+                <tr className="border-b border-[#383838] text-[11px] font-semibold text-[#8a8a8a] uppercase bg-[#222222]">
+                  <th className="py-2.5 px-4 w-12 text-center">Status</th>
+                  <th className="py-2.5 px-4">Title</th>
+                  <th className="py-2.5 px-4 w-28">Difficulty</th>
+                  <th className="py-2.5 px-4 w-32">Category</th>
+                  <th className="py-2.5 px-4 w-28">Acceptance</th>
+                  <th className="py-2.5 px-4 w-20 text-center">Action</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-[#333333] text-xs">
+                {companyProblems.map((problem) => {
+                  const solved = solvedProblems.has(problem.id);
+                  const bookmarked = isBookmarked(problem.id);
 
-                return (
-                  <div
-                    key={problem.id}
-                    className="flex flex-col sm:flex-row sm:items-center justify-between p-4 px-6 hover:bg-slate-800/40 transition-colors gap-3"
-                  >
-                    <div className="flex items-center gap-4 flex-1">
-                      <div className="w-5 flex justify-center">
-                        {isSolved ? (
-                          <CheckCircle2 className="h-4 w-4 text-emerald-400" />
+                  return (
+                    <tr
+                      key={problem.id}
+                      className="hover:bg-[#333333] transition-colors group"
+                    >
+                      <td className="py-3 px-4 text-center">
+                        {solved ? (
+                          <CheckCircle2 className="h-4 w-4 text-[#00b8a3] mx-auto" />
                         ) : (
-                          <span className="text-xs text-slate-500 font-mono">
-                            {index + 1}
-                          </span>
+                          <div className="h-4 w-4 rounded-full border border-[#4a4a4a] mx-auto" />
                         )}
-                      </div>
+                      </td>
 
-                      <button
-                        onClick={() => toggleBookmark(problem.id)}
-                        className="text-slate-500 hover:text-blue-400 transition-colors"
-                      >
-                        <Bookmark
-                          className={`h-4 w-4 ${
-                            bookmarked
-                              ? "fill-blue-500 text-blue-500"
-                              : "text-slate-600 hover:text-slate-400"
-                          }`}
-                        />
-                      </button>
-
-                      <div className="flex-1">
+                      <td className="py-3 px-4 font-medium text-white">
                         <Link
                           href={`/problems/${problem.id}`}
-                          className="font-bold text-sm text-slate-200 hover:text-blue-400 transition-colors inline-flex items-center gap-2"
+                          className="hover:text-[#FFA116] transition-colors flex items-center gap-2"
                         >
+                          <span className="text-[#8a8a8a]">{problem.number}.</span>
                           <span>{problem.title}</span>
                         </Link>
-                        <div className="flex items-center gap-2 text-[11px] text-slate-400 mt-0.5">
-                          <span className="text-slate-300 font-medium">
-                            {problem.category}
-                          </span>
-                          {problem.tags && problem.tags.length > 0 && (
-                            <>
-                              <span>•</span>
-                              <span>{problem.tags[0]}</span>
-                            </>
-                          )}
-                        </div>
-                      </div>
-                    </div>
+                      </td>
 
-                    <div className="flex items-center justify-between sm:justify-end gap-5 pl-9 sm:pl-0">
-                      <span
-                        className={`text-xs font-bold px-2.5 py-0.5 rounded-full ${
-                          problem.difficulty === "Easy"
-                            ? "bg-emerald-500/10 text-emerald-400 border border-emerald-500/20"
-                            : problem.difficulty === "Medium"
-                            ? "bg-amber-500/10 text-amber-400 border border-amber-500/20"
-                            : "bg-red-500/10 text-red-400 border border-red-500/20"
-                        }`}
-                      >
-                        {problem.difficulty}
-                      </span>
+                      <td className="py-3 px-4">
+                        <span
+                          className={`font-semibold ${
+                            problem.difficulty === "Easy"
+                              ? "text-[#00b8a3]"
+                              : problem.difficulty === "Medium"
+                              ? "text-[#ffc01e]"
+                              : "text-[#ff375f]"
+                          }`}
+                        >
+                          {problem.difficulty}
+                        </span>
+                      </td>
 
-                      <span className="text-xs text-slate-400 font-mono w-14 text-right hidden sm:inline">
+                      <td className="py-3 px-4 text-[#a0a0a0]">
+                        {problem.category}
+                      </td>
+
+                      <td className="py-3 px-4 font-mono text-[#a0a0a0]">
                         {problem.acceptance}
-                      </span>
+                      </td>
 
-                      <Link
-                        href={`/problems/${problem.id}`}
-                        className="flex items-center gap-1 text-xs font-bold px-3 py-1.5 rounded-lg bg-blue-600/15 hover:bg-blue-600 text-blue-400 hover:text-white border border-blue-500/30 transition-all"
-                      >
-                        <span>Solve</span>
-                        <ChevronRight className="h-3.5 w-3.5" />
-                      </Link>
-                    </div>
-                  </div>
-                );
-              })
-            )}
+                      <td className="py-3 px-4 text-center">
+                        <button
+                          onClick={() => toggleBookmark(problem.id)}
+                          className="text-[#8a8a8a] hover:text-[#FFA116] transition-colors"
+                          title="Bookmark"
+                        >
+                          <Bookmark
+                            className={`h-4 w-4 ${
+                              bookmarked ? "fill-[#FFA116] text-[#FFA116]" : ""
+                            }`}
+                          />
+                        </button>
+                      </td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </table>
           </div>
         </div>
 

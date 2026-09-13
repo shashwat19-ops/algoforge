@@ -205,7 +205,6 @@ export default function ResourcesPage() {
       ],
       template: `// Using Min-Heap of size K for Top K Largest Elements
 function findKthLargest(nums, k) {
-  // In JavaScript, build/use a MinHeap structure:
   const minHeap = new MinHeap(); // Keeps K elements
 
   for (const num of nums) {
@@ -431,54 +430,54 @@ function findKthLargest(nums, k) {
   );
 
   return (
-    <div className="flex flex-col min-h-screen bg-[#0a0d14] text-slate-100">
+    <div className="flex flex-col min-h-screen bg-[#1a1a1a] text-[#eff1f6]">
       <Navbar />
 
-      <main className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
+      <main className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-6">
 
         {/* HEADER HERO */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-4">
           <div>
-            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-xs font-bold mb-3">
+            <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-[#FFA116]/20 border border-[#FFA116]/30 text-[#FFA116] text-xs font-bold mb-2">
               <BookOpen className="h-3.5 w-3.5" />
-              <span>DSA Mastery Cheatsheets & Reference</span>
+              <span>DSA Cheatsheets & Reference</span>
             </div>
-            <h1 className="text-3xl sm:text-4xl font-black text-white">
-              AlgoForge Engineering Handbook
+            <h1 className="text-2xl sm:text-3xl font-black text-white">
+              Engineering Handbook
             </h1>
-            <p className="text-sm text-slate-400 mt-2 max-w-2xl">
+            <p className="text-xs text-[#a0a0a0] mt-1.5 max-w-2xl">
               Comprehensive reference guides for algorithmic patterns, Big-O complexity charts, and proven FAANG interview problem-solving frameworks.
             </p>
           </div>
 
           {/* Tab Navigation */}
-          <div className="flex items-center gap-1.5 p-1.5 rounded-xl bg-slate-900 border border-slate-800">
+          <div className="flex items-center gap-1 p-1 rounded-lg bg-[#282828] border border-[#383838]">
             <button
               onClick={() => setActiveTab("patterns")}
-              className={`px-4 py-2 rounded-lg text-xs font-bold transition-all ${
+              className={`px-3 py-1.5 rounded-md text-xs font-bold transition-all ${
                 activeTab === "patterns"
-                  ? "bg-blue-600 text-white shadow-sm"
-                  : "text-slate-400 hover:text-white"
+                  ? "bg-[#383838] text-white"
+                  : "text-[#8a8a8a] hover:text-white"
               }`}
             >
               14 DSA Patterns
             </button>
             <button
               onClick={() => setActiveTab("big-o")}
-              className={`px-4 py-2 rounded-lg text-xs font-bold transition-all ${
+              className={`px-3 py-1.5 rounded-md text-xs font-bold transition-all ${
                 activeTab === "big-o"
-                  ? "bg-blue-600 text-white shadow-sm"
-                  : "text-slate-400 hover:text-white"
+                  ? "bg-[#383838] text-white"
+                  : "text-[#8a8a8a] hover:text-white"
               }`}
             >
               Big-O Complexity
             </button>
             <button
               onClick={() => setActiveTab("framework")}
-              className={`px-4 py-2 rounded-lg text-xs font-bold transition-all ${
+              className={`px-3 py-1.5 rounded-md text-xs font-bold transition-all ${
                 activeTab === "framework"
-                  ? "bg-blue-600 text-white shadow-sm"
-                  : "text-slate-400 hover:text-white"
+                  ? "bg-[#383838] text-white"
+                  : "text-[#8a8a8a] hover:text-white"
               }`}
             >
               Interview Framework
@@ -488,43 +487,43 @@ function findKthLargest(nums, k) {
 
         {/* TAB 1: 14 DSA PATTERNS */}
         {activeTab === "patterns" && (
-          <div className="space-y-6">
+          <div className="space-y-4">
             {/* Search Input */}
             <div className="relative max-w-md">
-              <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400" />
+              <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-3.5 w-3.5 text-[#8a8a8a]" />
               <input
                 type="text"
                 placeholder="Search algorithmic patterns..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full pl-10 pr-4 py-2.5 bg-slate-900/90 border border-slate-800 rounded-xl text-xs text-slate-200 placeholder-slate-500 focus:outline-none focus:border-blue-500/50 transition-colors"
+                className="w-full pl-9 pr-3 py-2 bg-[#282828] border border-[#383838] rounded-lg text-xs text-white placeholder-[#8a8a8a] focus:outline-none focus:border-[#FFA116] transition-colors"
               />
             </div>
 
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-4">
               {/* Pattern Selector List */}
-              <div className="lg:col-span-4 space-y-2">
+              <div className="lg:col-span-4 space-y-1.5">
                 {filteredPatterns.map((pattern, idx) => {
                   const isSelected = selectedPattern === idx;
                   return (
                     <button
                       key={idx}
                       onClick={() => setSelectedPattern(idx)}
-                      className={`w-full text-left p-4 rounded-2xl border transition-all ${
+                      className={`w-full text-left p-3 rounded-xl border transition-all ${
                         isSelected
-                          ? "bg-blue-950/40 border-blue-500/50 shadow-lg shadow-blue-500/10"
-                          : "bg-slate-900/60 border-slate-800 hover:bg-slate-800/50"
+                          ? "bg-[#303030] border-[#FFA116] text-white"
+                          : "bg-[#282828] border-[#383838] hover:bg-[#333333] text-[#eff1f6]"
                       }`}
                     >
                       <div className="flex items-center justify-between">
                         <span className="font-bold text-xs text-white">
                           {pattern.name}
                         </span>
-                        <span className="text-[10px] px-2 py-0.5 rounded bg-slate-800 text-slate-400 border border-slate-700/60">
+                        <span className="text-[10px] px-1.5 py-0.5 rounded bg-[#1e1e1e] text-[#a0a0a0] border border-[#383838]">
                           {pattern.category}
                         </span>
                       </div>
-                      <p className="text-[11px] text-slate-400 mt-1 line-clamp-2 leading-relaxed">
+                      <p className="text-[11px] text-[#a0a0a0] mt-1 line-clamp-2 leading-relaxed">
                         {pattern.description}
                       </p>
                     </button>
@@ -533,37 +532,37 @@ function findKthLargest(nums, k) {
               </div>
 
               {/* Pattern Detail Viewer */}
-              <div className="lg:col-span-8 p-6 sm:p-8 rounded-3xl bg-slate-900/80 border border-slate-800 shadow-2xl space-y-6">
+              <div className="lg:col-span-8 p-5 sm:p-6 rounded-xl bg-[#282828] border border-[#383838] space-y-4">
                 {filteredPatterns[selectedPattern] && (
                   <>
-                    <div className="space-y-2">
+                    <div className="space-y-1.5">
                       <div className="flex items-center gap-2">
-                        <span className="px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-xs font-bold">
+                        <span className="px-2.5 py-0.5 rounded-full bg-[#FFA116]/20 border border-[#FFA116]/30 text-[#FFA116] text-xs font-bold">
                           {filteredPatterns[selectedPattern].category}
                         </span>
                       </div>
-                      <h2 className="text-2xl font-black text-white">
+                      <h2 className="text-xl font-black text-white">
                         {filteredPatterns[selectedPattern].name}
                       </h2>
-                      <p className="text-sm text-slate-300 leading-relaxed">
+                      <p className="text-xs text-[#a0a0a0] leading-relaxed">
                         {filteredPatterns[selectedPattern].description}
                       </p>
                     </div>
 
                     {/* When to use triggers */}
-                    <div className="p-5 rounded-2xl bg-slate-950/60 border border-slate-800/80 space-y-3">
-                      <div className="text-xs font-bold text-blue-400 uppercase tracking-wider flex items-center gap-1.5">
-                        <Sparkles className="h-4 w-4" />
+                    <div className="p-4 rounded-xl bg-[#1e1e1e] border border-[#383838] space-y-2">
+                      <div className="text-xs font-bold text-[#FFA116] uppercase tracking-wider flex items-center gap-1.5">
+                        <Sparkles className="h-3.5 w-3.5" />
                         <span>Problem Triggers & Recognition</span>
                       </div>
-                      <ul className="space-y-2">
+                      <ul className="space-y-1.5">
                         {filteredPatterns[selectedPattern].whenToUse.map(
                           (useCase, uIdx) => (
                             <li
                               key={uIdx}
-                              className="text-xs text-slate-300 flex items-start gap-2.5"
+                              className="text-xs text-[#eff1f6] flex items-start gap-2"
                             >
-                              <div className="h-1.5 w-1.5 rounded-full bg-blue-400 mt-1.5 shrink-0" />
+                              <div className="h-1.5 w-1.5 rounded-full bg-[#FFA116] mt-1.5 shrink-0" />
                               <span>{useCase}</span>
                             </li>
                           )
@@ -574,8 +573,8 @@ function findKthLargest(nums, k) {
                     {/* Code Template */}
                     <div className="space-y-2">
                       <div className="flex items-center justify-between">
-                        <div className="text-xs font-bold text-slate-400 uppercase tracking-wider flex items-center gap-1.5">
-                          <Code2 className="h-4 w-4 text-emerald-400" />
+                        <div className="text-xs font-bold text-[#8a8a8a] uppercase tracking-wider flex items-center gap-1.5">
+                          <Code2 className="h-4 w-4 text-[#00b8a3]" />
                           <span>Standard Code Boilerplate</span>
                         </div>
                         <button
@@ -585,12 +584,12 @@ function findKthLargest(nums, k) {
                               selectedPattern
                             )
                           }
-                          className="flex items-center gap-1 text-xs font-medium text-slate-400 hover:text-white px-2.5 py-1 rounded-lg bg-slate-800 border border-slate-700 transition-colors"
+                          className="flex items-center gap-1 text-xs font-medium text-[#a0a0a0] hover:text-white px-2.5 py-1 rounded-md bg-[#1e1e1e] border border-[#383838] transition-colors"
                         >
                           {copiedIndex === selectedPattern ? (
                             <>
-                              <Check className="h-3.5 w-3.5 text-emerald-400" />
-                              <span className="text-emerald-400">Copied</span>
+                              <Check className="h-3.5 w-3.5 text-[#00b8a3]" />
+                              <span className="text-[#00b8a3]">Copied</span>
                             </>
                           ) : (
                             <>
@@ -601,7 +600,7 @@ function findKthLargest(nums, k) {
                         </button>
                       </div>
 
-                      <div className="p-4 rounded-2xl bg-slate-950 border border-slate-800 font-mono text-xs text-slate-200 overflow-x-auto">
+                      <div className="p-3.5 rounded-xl bg-[#1e1e1e] border border-[#383838] font-mono text-xs text-[#eff1f6] overflow-x-auto">
                         <pre>{filteredPatterns[selectedPattern].template}</pre>
                       </div>
                     </div>
@@ -614,39 +613,39 @@ function findKthLargest(nums, k) {
 
         {/* TAB 2: BIG-O COMPLEXITY */}
         {activeTab === "big-o" && (
-          <div className="space-y-8">
+          <div className="space-y-4">
             {/* Data Structures Complexity */}
-            <div className="rounded-2xl border border-slate-800 bg-slate-900/60 overflow-hidden shadow-xl">
-              <div className="px-6 py-4 border-b border-slate-800 flex items-center justify-between">
-                <div className="text-xs font-bold text-slate-300 uppercase tracking-wider flex items-center gap-2">
-                  <Layers className="h-4 w-4 text-blue-400" />
+            <div className="rounded-xl border border-[#383838] bg-[#282828] overflow-hidden">
+              <div className="px-4 py-3 border-b border-[#383838] bg-[#222222] flex items-center justify-between">
+                <div className="text-xs font-bold text-white uppercase tracking-wider flex items-center gap-2">
+                  <Layers className="h-4 w-4 text-[#FFA116]" />
                   <span>Common Data Structure Complexities</span>
                 </div>
               </div>
 
               <div className="overflow-x-auto">
                 <table className="w-full text-left text-xs">
-                  <thead className="bg-slate-950/80 text-slate-400 border-b border-slate-800 font-bold uppercase text-[10px]">
+                  <thead className="bg-[#1e1e1e] text-[#8a8a8a] border-b border-[#383838] font-bold uppercase text-[10px]">
                     <tr>
-                      <th className="p-4 px-6">Data Structure</th>
-                      <th className="p-4">Access</th>
-                      <th className="p-4">Search</th>
-                      <th className="p-4">Insertion</th>
-                      <th className="p-4">Deletion</th>
-                      <th className="p-4">Space Complexity</th>
+                      <th className="py-2.5 px-4">Data Structure</th>
+                      <th className="py-2.5 px-4">Access</th>
+                      <th className="py-2.5 px-4">Search</th>
+                      <th className="py-2.5 px-4">Insertion</th>
+                      <th className="py-2.5 px-4">Deletion</th>
+                      <th className="py-2.5 px-4">Space Complexity</th>
                     </tr>
                   </thead>
-                  <tbody className="divide-y divide-slate-800/60 font-mono">
+                  <tbody className="divide-y divide-[#333333] font-mono">
                     {BIG_O_DATA.map((row, idx) => (
-                      <tr key={idx} className="hover:bg-slate-800/40 transition-colors">
-                        <td className="p-4 px-6 font-bold font-sans text-white">
+                      <tr key={idx} className="hover:bg-[#333333] transition-colors">
+                        <td className="py-3 px-4 font-bold font-sans text-white">
                           {row.name}
                         </td>
-                        <td className="p-4 text-emerald-400">{row.access}</td>
-                        <td className="p-4 text-amber-400">{row.search}</td>
-                        <td className="p-4 text-emerald-400">{row.insertion}</td>
-                        <td className="p-4 text-emerald-400">{row.deletion}</td>
-                        <td className="p-4 text-blue-400">{row.space}</td>
+                        <td className="py-3 px-4 text-[#00b8a3]">{row.access}</td>
+                        <td className="py-3 px-4 text-[#ffc01e]">{row.search}</td>
+                        <td className="py-3 px-4 text-[#00b8a3]">{row.insertion}</td>
+                        <td className="py-3 px-4 text-[#00b8a3]">{row.deletion}</td>
+                        <td className="py-3 px-4 text-[#FFA116]">{row.space}</td>
                       </tr>
                     ))}
                   </tbody>
@@ -655,37 +654,37 @@ function findKthLargest(nums, k) {
             </div>
 
             {/* Sorting Algorithms Complexity */}
-            <div className="rounded-2xl border border-slate-800 bg-slate-900/60 overflow-hidden shadow-xl">
-              <div className="px-6 py-4 border-b border-slate-800 flex items-center justify-between">
-                <div className="text-xs font-bold text-slate-300 uppercase tracking-wider flex items-center gap-2">
-                  <Zap className="h-4 w-4 text-amber-400" />
+            <div className="rounded-xl border border-[#383838] bg-[#282828] overflow-hidden">
+              <div className="px-4 py-3 border-b border-[#383838] bg-[#222222] flex items-center justify-between">
+                <div className="text-xs font-bold text-white uppercase tracking-wider flex items-center gap-2">
+                  <Zap className="h-4 w-4 text-[#FFA116]" />
                   <span>Sorting Algorithms Complexities</span>
                 </div>
               </div>
 
               <div className="overflow-x-auto">
                 <table className="w-full text-left text-xs">
-                  <thead className="bg-slate-950/80 text-slate-400 border-b border-slate-800 font-bold uppercase text-[10px]">
+                  <thead className="bg-[#1e1e1e] text-[#8a8a8a] border-b border-[#383838] font-bold uppercase text-[10px]">
                     <tr>
-                      <th className="p-4 px-6">Algorithm</th>
-                      <th className="p-4">Best Time</th>
-                      <th className="p-4">Average Time</th>
-                      <th className="p-4">Worst Time</th>
-                      <th className="p-4">Worst Space</th>
-                      <th className="p-4">Stable</th>
+                      <th className="py-2.5 px-4">Algorithm</th>
+                      <th className="py-2.5 px-4">Best Time</th>
+                      <th className="py-2.5 px-4">Average Time</th>
+                      <th className="py-2.5 px-4">Worst Time</th>
+                      <th className="py-2.5 px-4">Worst Space</th>
+                      <th className="py-2.5 px-4">Stable</th>
                     </tr>
                   </thead>
-                  <tbody className="divide-y divide-slate-800/60 font-mono">
+                  <tbody className="divide-y divide-[#333333] font-mono">
                     {SORTING_BIG_O.map((row, idx) => (
-                      <tr key={idx} className="hover:bg-slate-800/40 transition-colors">
-                        <td className="p-4 px-6 font-bold font-sans text-white">
+                      <tr key={idx} className="hover:bg-[#333333] transition-colors">
+                        <td className="py-3 px-4 font-bold font-sans text-white">
                           {row.name}
                         </td>
-                        <td className="p-4 text-emerald-400">{row.timeBest}</td>
-                        <td className="p-4 text-emerald-400">{row.timeAvg}</td>
-                        <td className="p-4 text-amber-400">{row.timeWorst}</td>
-                        <td className="p-4 text-blue-400">{row.space}</td>
-                        <td className="p-4 font-sans font-semibold text-slate-300">
+                        <td className="py-3 px-4 text-[#00b8a3]">{row.timeBest}</td>
+                        <td className="py-3 px-4 text-[#00b8a3]">{row.timeAvg}</td>
+                        <td className="py-3 px-4 text-[#ffc01e]">{row.timeWorst}</td>
+                        <td className="py-3 px-4 text-[#FFA116]">{row.space}</td>
+                        <td className="py-3 px-4 font-sans font-semibold text-[#a0a0a0]">
                           {row.stable}
                         </td>
                       </tr>
@@ -699,44 +698,44 @@ function findKthLargest(nums, k) {
 
         {/* TAB 3: INTERVIEW FRAMEWORK */}
         {activeTab === "framework" && (
-          <div className="space-y-6">
-            <div className="p-7 rounded-3xl bg-slate-900/80 border border-slate-800 shadow-xl space-y-4">
-              <h2 className="text-xl font-black text-white flex items-center gap-2">
-                <ShieldCheck className="h-5 w-5 text-emerald-400" />
+          <div className="space-y-4">
+            <div className="p-5 rounded-xl bg-[#282828] border border-[#383838] space-y-2">
+              <h2 className="text-lg font-black text-white flex items-center gap-2">
+                <ShieldCheck className="h-5 w-5 text-[#00b8a3]" />
                 <span>The 45-Minute FAANG Coding Interview Protocol</span>
               </h2>
-              <p className="text-xs text-slate-400 max-w-3xl leading-relaxed">
+              <p className="text-xs text-[#a0a0a0] max-w-3xl leading-relaxed">
                 Senior engineering interviewers evaluate candidate problem formulation, structured thought communication, and edge-case resilience far more than sheer syntax speed. Follow this strict 6-stage blueprint to consistently ace technical screens.
               </p>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               {INTERVIEW_FRAMEWORK.map((stage) => (
                 <div
                   key={stage.step}
-                  className="p-6 rounded-2xl bg-slate-900/80 border border-slate-800 shadow-xl space-y-4"
+                  className="p-4 rounded-xl bg-[#282828] border border-[#383838] space-y-3"
                 >
                   <div className="flex items-center justify-between">
-                    <div className="flex items-center gap-2.5">
-                      <span className="h-7 w-7 rounded-xl bg-blue-500/20 text-blue-400 border border-blue-500/30 flex items-center justify-center font-bold text-xs">
+                    <div className="flex items-center gap-2">
+                      <span className="h-6 w-6 rounded-md bg-[#FFA116]/20 text-[#FFA116] border border-[#FFA116]/30 flex items-center justify-center font-bold text-xs">
                         {stage.step}
                       </span>
-                      <h3 className="font-bold text-sm text-white">
+                      <h3 className="font-bold text-xs text-white">
                         {stage.title}
                       </h3>
                     </div>
-                    <span className="text-xs font-mono font-bold text-amber-400 px-2.5 py-1 rounded-lg bg-amber-500/10 border border-amber-500/20">
+                    <span className="text-[10px] font-mono font-bold text-[#FFA116] px-2 py-0.5 rounded bg-[#FFA116]/10 border border-[#FFA116]/20">
                       {stage.time}
                     </span>
                   </div>
 
-                  <ul className="space-y-2 pt-2 border-t border-slate-800">
+                  <ul className="space-y-1.5 pt-2 border-t border-[#383838]">
                     {stage.bullets.map((b, idx) => (
                       <li
                         key={idx}
-                        className="text-xs text-slate-300 flex items-start gap-2.5 leading-relaxed"
+                        className="text-xs text-[#eff1f6] flex items-start gap-2 leading-relaxed"
                       >
-                        <div className="h-1.5 w-1.5 rounded-full bg-blue-400 mt-1.5 shrink-0" />
+                        <div className="h-1.5 w-1.5 rounded-full bg-[#FFA116] mt-1.5 shrink-0" />
                         <span>{b}</span>
                       </li>
                     ))}
